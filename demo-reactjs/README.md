@@ -28,6 +28,7 @@ You will also see any lint errors in the console.
     tax:
     shipping_charge:
     state:
+    custom_id
  }
 ```
 #### Request Body
@@ -39,6 +40,7 @@ You will also see any lint errors in the console.
 | tax | No | Tax amount you want to charge |
 | shipping_charge | No | Shipping amount you want to charge |
 | state | No | Whatever you want to get back after a transaction in a redirect URL(ex. your own transaction id or product id). *Note. not saved in Payfirma side* |
+| custom_id | No | Keep track of transactions and for future accounting reconciliation |
 
 ### 2. How the Redirect URL looks like
 
