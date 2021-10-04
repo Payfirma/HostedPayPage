@@ -31,7 +31,9 @@ class App extends Component {
       tax: 5.44,
       shipping_charge: 10.0,
       // State that needs to be contained with redirect URL when the transaction is done
-      state: 'stateIWantToKeep'
+      state: 'stateIWantToKeep',
+      // Field used to keep track of transactions and for future accounting reconciliation
+      custom_id: 'Please enter your custom Id'
     };
 
     // ********************************************************
