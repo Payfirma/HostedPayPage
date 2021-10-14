@@ -31,7 +31,9 @@ class App extends Component {
       tax: 5.44,
       shipping_charge: 10.0,
       // State that needs to be contained with redirect URL when the transaction is done
-      state: 'stateIWantToKeep'
+      state: 'stateIWantToKeep',
+      // Field used to keep track of transactions and for future accounting reconciliation
+      custom_id: 'Please enter your custom Id'
     };
 
     // ********************************************************
@@ -68,9 +70,9 @@ class App extends Component {
             render={props => {
               const parsed = queryString.parse(props.location.search);
               // Query parameters carried with the redirect URL after transaction
-              // ex) https://payfirma-hpp-demo.web.app/return?result=success&lookup_id=123456&state=stateIWantToKeep
-              const { result, lookup_id, state } = parsed;
-              return <RedirectedPage result={result} lookup_id={lookup_id} state={state} styles={styles} />;
+              // ex) https://payfirma-hpp-demo.web.app/return?result=success&lookup_id=123456&state=stateIWantToKeep&custom=123456
+              const { result, lookup_id, state, custom_id } = parsed;
+              return <RedirectedPage result={result} lookup_id={lookup_id} state={state} custom_id={custom_id} styles={styles} />;
             }}
           />
           {/* Main demo page */}
