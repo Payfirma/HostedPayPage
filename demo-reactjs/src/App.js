@@ -70,9 +70,9 @@ class App extends Component {
             render={props => {
               const parsed = queryString.parse(props.location.search);
               // Query parameters carried with the redirect URL after transaction
-              // ex) https://payfirma-hpp-demo.web.app/return?result=success&lookup_id=123456&state=stateIWantToKeep
-              const { result, lookup_id, state } = parsed;
-              return <RedirectedPage result={result} lookup_id={lookup_id} state={state} styles={styles} />;
+              // ex) https://payfirma-hpp-demo.web.app/return?result=success&lookup_id=123456&state=stateIWantToKeep&custom=123456
+              const { result, lookup_id, state, custom_id } = parsed;
+              return <RedirectedPage result={result} lookup_id={lookup_id} state={state} custom_id={custom_id} styles={styles} />;
             }}
           />
           {/* Main demo page */}

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
  * @prop {string} state State you want to keep in the returned page
  * 
  */
-const RedirectedPage = ({ result, lookup_id, state, ...props }) => {
+const RedirectedPage = ({ result, lookup_id, state, custom_id, ...props }) => {
   return (
     <div className="App" style={props.styles.app}>
       <div style={props.styles.header}>PayHQ Hosted Payment Page Demo</div>
@@ -33,6 +33,7 @@ const RedirectedPage = ({ result, lookup_id, state, ...props }) => {
           <div>Result:</div>
           <div>Transaction ID:</div>
           <div>State: </div>
+          <div>Custom ID: </div>
         </div>
         <div style={props.styles.values}>
           <div>
@@ -43,6 +44,9 @@ const RedirectedPage = ({ result, lookup_id, state, ...props }) => {
           </div>
           <div>
             {state}
+          </div>
+          <div>
+            {custom_id}
           </div>
         </div>
       </div>
