@@ -54,7 +54,7 @@ Assuming your redirect URL registered in the PayHQ Settings HostedPayPage page i
  }
 ```
 ### Redirect URL after the transaction
-`https://example.com/redirect?result=APPROVED&lookup_id=w7Kjaxy51kX82y4vYVDO&state=Product1`
+`https://example.com/redirect?result=APPROVED&transaction_id=123456&lookup_id=w7Kjaxy51kX82y4vYVDO&state=Product1`
 
 The browser will redirect a user to this URL
 
@@ -66,18 +66,28 @@ The browser will redirect a user to this URL
 | DECLINED | - |
 | CANCELED | - |
  
-- *lookup_id* will be always changed since it’s an transaction ID
+- `transaction_id` will be always changed since it’s an transaction ID(numeric id)
+
+- `lookup_id` will be always changed since it’s an transaction ID(lookup id)
  
-- *state* will be whatever you have included in the request for initializing HPP Transaction
+- `state` will be whatever you have included in the request for initializing HPP Transaction
 
-- You can see how the transaction went through with ***result***,
-- You can use your own identifier what the transaction was about with ***state***
-- You can use ***lookup_id*** to fetch the transaction information from the Payfirma side for any purposes you may have in the future.
+- You can see how the transaction went through with `result`,
+- You can use your own identifier what the transaction was about with `state`
+- You can use either `transaction_id` or `lookup_id` to fetch the transaction information from the Payfirma side for any purposes you may have in the future.
 
-### 3. How to use *lookup_id* to get transaction data through Payfirma API
+### 3. How to use `transaction_id` and `lookup_id` to get transaction data through Payfirma API
 ```
  Method: GET
  URL:  https://apigateway.payfirma.com/transaction-service/transaction/lookup/<lookup_id>
+ Header: {
+    Authorization: Bearer <provided access token>
+    Content-Type: application/json
+ }
+ ```
+ ```
+ Method: GET
+ URL:  https://apigateway.payfirma.com/transaction-service/transaction/<transaction_id>
  Header: {
     Authorization: Bearer <provided access token>
     Content-Type: application/json

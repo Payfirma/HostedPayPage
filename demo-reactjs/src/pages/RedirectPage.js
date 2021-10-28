@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
  * @prop {string} state State you want to keep in the returned page
  * 
  */
-const RedirectedPage = ({ result, lookup_id, state, custom_id, ...props }) => {
+const RedirectedPage = ({ result, transaction_id, lookup_id, state, custom_id, ...props }) => {
   return (
     <div className="App" style={props.styles.app}>
       <div style={props.styles.header}>PayHQ Hosted Payment Page Demo</div>
@@ -32,12 +32,16 @@ const RedirectedPage = ({ result, lookup_id, state, custom_id, ...props }) => {
         <div style={props.styles.field}>
           <div>Result:</div>
           <div>Transaction ID:</div>
+          <div>Transaction Lookup ID:</div>
           <div>State: </div>
           <div>Custom ID: </div>
         </div>
         <div style={props.styles.values}>
           <div>
             {result}
+          </div>
+          <div>
+            {transaction_id}
           </div>
           <div>
             {lookup_id}
@@ -62,6 +66,6 @@ RedirectedPage.propTypes = {
   // State you wanted to keep when it comes back
   state: PropTypes.string,
   styles: PropTypes.object
-}
+};
 
 export default RedirectedPage;
