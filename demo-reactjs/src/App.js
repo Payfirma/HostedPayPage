@@ -33,7 +33,16 @@ class App extends Component {
       // State that needs to be contained with redirect URL when the transaction is done
       state: 'stateIWantToKeep',
       // Field used to keep track of transactions and for future accounting reconciliation
-      custom_id: 'Please enter your custom Id'
+      custom_id: 'Please enter your custom Id',
+            
+      // Extra optional fields can be sent below
+
+      // firstName: 'firstName',
+      // lastName: 'lastName',
+      // email: 'email',
+      // telephone: 'telephone',
+      // shipping_address: '{"address1":"","address2":"","city":"","province":"","country":"","postalCode":""}',
+      // billing_address: '{"address1":"","address2":"","city":"","province":"","country":"","postalCode":""}',
     };
 
     // ********************************************************
