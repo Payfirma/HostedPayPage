@@ -1,49 +1,111 @@
-# HostedPayPage
+## Available Scripts
 
-# Steps to setup HPP on PayHQ
+In the project directory, you can run:
 
-Basic requirements for integrating with PayHQ Hosted Payment Page
+### `npm start`
 
-1. Setup your hosted payment page
-1. Provide the domain name and return page URL
-1. Generate your access token
-1. Use this access token to send payment request to the hosted payment page endpoint
+Runs the app in the development mode.<br />
+Open [https://localhost:3001](https://localhost:3001) to view it in the browser.
 
-Follow these steps to get started with HPP setup
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-1. Login to your merchant account
-1. Open settings and select hosted payment page
+## How to get HPP URL
 
-<img width="1394" alt="Screen Shot 2021-10-19 at 12 25 16 PM" src="https://user-images.githubusercontent.com/91910851/137978359-879e513f-be5b-49af-aa16-ecf5f787c971.png">
+### 1. POST Request
 
-3. Enter your domain, return URL and callback URL(optional) to setup your hosted payment page
+```
+ Method: POST
+ URL: you can find this URL in PayHQ - Settings - Hosted Pay Page
+ Header: {
+    Authorization: Bearer <provided access token>
+    Content-Type: application/json
+ }
+ Body: {
+    amount:
+    currency:
+    domain:
+    tax:
+    shipping_charge:
+    state:
+    custom_id:
+    first_name:
+    last_name:
+    email:
+    telephone:
+    shipping_address:
+    billing_address:
+ }
+```
+#### Request Body
+| Field | Required |  Description |
+| ----------- | ----------- | ----------- |
+| amount | Yes | Tax, shipping_charge excluded |
+| currency | Yes | CAD or USD |
+| domain | Yes | Domain registered in PayHQ - Settings - Hosted Pay Page when you setup (ex. https://example.com) |
+| tax | No | Tax amount you want to charge |
+| shipping_charge | No | Shipping amount you want to charge |
+| state | No | Whatever you want to get back after a transaction in a redirect URL(ex. your own transaction id or product id). *Note. not saved in Payfirma side* |
+| custom_id | No | Keep track of transactions and for future accounting reconciliation |
+| first_name | No | First name of the customer |
+| last_name | No | Last name of the customer |
+| email | No | Email of the customer |
+| telephone | No | Phone number of the customer |
+| shipping_address | No | Shipping Address of the customer |
+| billing_address | No | Billing Address of the customer |
 
-<img width="1394" alt="Screen Shot 2021-10-19 at 12 27 59 PM" src="https://user-images.githubusercontent.com/91910851/137979303-e421a999-3b6c-4f68-8326-bbeb3ced8c5e.png">
+### 2. How the Redirect URL looks like
 
-4. Once you enter this your hosted payment page will get set up and you will notice that you have been provided the init endpoint to send transaction requests to. 
+Assuming your redirect URL registered in the PayHQ Settings HostedPayPage page is ‘https://example.com/redirect’.
+```
+ Body: {
+    amount:10.00
+    currency: CAD
+    domain:https://example.com
+    state:Product1
+    custom_id:123456
+ }
+```
+### Redirect URL after the transaction
+`https://example.com/redirect?result=APPROVED&transaction_id=123456&lookup_id=w7Kjaxy51kX82y4vYVDO&state=Product1&custom_id=123456`
 
-<img width="1175" alt="Screen Shot 2021-10-19 at 12 28 34 PM" src="https://user-images.githubusercontent.com/91910851/137979744-3a4a15e1-6a1f-4f0f-9fe5-517304f41047.png">
+The browser will redirect a user to this URL
 
-5. But before you can start using the hosted payment page you will need the access token in order to get access to the backend functionality. 
-6. Click on Generate Token button to generate your access token
+- *result* will be one of the following statuses
 
-<img width="1177" alt="Screen Shot 2021-10-19 at 12 31 51 PM" src="https://user-images.githubusercontent.com/91910851/137979935-94debe23-5936-4697-83dc-8b2f7eda6f4e.png">
+| Status |
+| ----------- | 
+| APPROVED | - |
+| DECLINED | - |
+| CANCELED | - |
+ 
+- `transaction_id` will be always changed since it’s an transaction ID(numeric id)
 
-7. At this point you are all set to start integrating with our hosted payment page
-8. Additionally if you are interested in collecting billing and shipping information on the hosted payment page then you can select the capture billing address and capture shipping address options. You can select both or just one of these options, depending on your requirements.
+- `lookup_id` will be always changed since it’s an transaction ID(lookup id)
+ 
+- `state` will be whatever you have included in the request for initializing HPP Transaction
 
-<img width="1193" alt="Screen Shot 2021-10-19 at 12 32 57 PM" src="https://user-images.githubusercontent.com/91910851/137980167-7e6df2ca-524a-4942-a209-074e7fa3b1b9.png">
+- `custom_id` will be whatever you have included in the request for initializing HPP Transaction
 
-9. At this point you are done with creating your hosted payment page settings.
-10. Next step is to use these settings in your e-commerce application.
+- You can see how the transaction went through with `result`,
+- You can use your own identifier what the transaction was about with `state`
+- You can use your own identifier `custom_id` for future accounting reconciliation to keep track of transactions 
+- You can use either `transaction_id` or `lookup_id` to fetch the transaction information from the Payfirma side for any purposes you may have in the future.
 
-# Using the sample application
-
-1. Clone the sample application
-2. Open App.js and replace ENDPOINT, DOMAIN and TOKEN values with the InitEndpoint, domain entered in your HPP settings page and the access token respectively.
-3. Open the package.json file and change the HTTPS and port settings as per your requirements
-
-Run and test this demo application
-
-
-
+### 3. How to use `transaction_id` and `lookup_id` to get transaction data through Payfirma API
+```
+ Method: GET
+ URL:  https://apigateway.payfirma.com/transaction-service/transaction/lookup/<lookup_id>
+ Header: {
+    Authorization: Bearer <provided access token>
+    Content-Type: application/json
+ }
+ ```
+ ```
+ Method: GET
+ URL:  https://apigateway.payfirma.com/transaction-service/transaction/<transaction_id>
+ Header: {
+    Authorization: Bearer <provided access token>
+    Content-Type: application/json
+ }
+ ```
