@@ -33,7 +33,16 @@ class App extends Component {
       // State that needs to be contained with redirect URL when the transaction is done
       state: 'stateIWantToKeep',
       // Field used to keep track of transactions and for future accounting reconciliation
-      custom_id: 'Please enter your custom Id'
+      custom_id: 'Please enter your custom Id',
+            
+      // Extra optional fields can be sent below
+
+      // first_name: 'firstName',
+      // last_name: 'lastName',
+      // email: 'email',
+      // telephone: 'telephone',
+      // shipping_address: '{"address1":"","address2":"","city":"","province":"","country":"","postalCode":""}',
+      // billing_address: '{"address1":"","address2":"","city":"","province":"","country":"","postalCode":""}',
     };
 
     // ********************************************************
@@ -70,7 +79,7 @@ class App extends Component {
             render={props => {
               const parsed = queryString.parse(props.location.search);
               // Query parameters carried with the redirect URL after transaction
-              // ex) https://payfirma-hpp-demo.web.app/return?result=success&lookup_id=123456&state=stateIWantToKeep&custom=123456
+              // ex) https://payfirma-hpp-demo.web.app/return?result=success&lookup_id=123456&state=stateIWantToKeep&custom_id=123456
               const { result, transaction_id, lookup_id, state, custom_id } = parsed;
               return (
                 <RedirectedPage
