@@ -37,7 +37,7 @@ You will also see any lint errors in the console.
     billing_address:
  }
 
-For shipping_address/billing_address, country and province should be in short coden and whole object as JSON string.
+For shipping_address/billing_address, country and province should be in short code and whole object as JSON string.
 
 Ex - shipping_address: '{
                           "address1": "xyz",
