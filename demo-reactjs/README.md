@@ -36,6 +36,18 @@ You will also see any lint errors in the console.
     shipping_address:
     billing_address:
  }
+
+For shipping_address/billing_address, country and province should be in short coden and whole object as JSON string.
+
+Ex - shipping_address: '{
+                          "address1": "xyz",
+                          "address2": "abc",
+                          "city": "Vancouver",
+                          "province": "BC",
+                          "country": "CA",
+                          "postalCode": "XYZ123"
+                        }'
+
 ```
 #### Request Body
 | Field | Required |  Description |
@@ -51,8 +63,8 @@ You will also see any lint errors in the console.
 | last_name | No | Last name of the customer |
 | email | No | Email of the customer |
 | telephone | No | Phone number of the customer |
-| shipping_address | No | Shipping Address of the customer |
-| billing_address | No | Billing Address of the customer |
+| shipping_address | No | Shipping Address of the customer(whole object as JSON string) |
+| billing_address | No | Billing Address of the customer(whole object as JSON string) |
 
 ### 2. How the Redirect URL looks like
 
