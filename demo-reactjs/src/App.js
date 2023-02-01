@@ -37,8 +37,8 @@ class App extends Component {
             
       // Extra optional fields can be sent below
 
-      // firstName: 'firstName',
-      // lastName: 'lastName',
+      // first_name: 'firstName',
+      // last_name: 'lastName',
       // email: 'email',
       // telephone: 'telephone',
       // shipping_address: '{"address1":"","address2":"","city":"","province":"","country":"","postalCode":""}',
