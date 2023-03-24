@@ -9,6 +9,8 @@ Basic requirements for integrating with PayHQ Hosted Payment Page
 1. Generate your access token
 1. Use this access token to send payment request to the hosted payment page endpoint
 
+**Customer Vault Feature** - If you would like to enable the customer vault feature for Hosted Payment Page (HPP), please inform our team and we will configure it from our admin side. With this feature, customers who have at least one card saved in the PayHQ will be able to make transactions using their saved card details.
+
 Follow these steps to get started with HPP setup
 
 1. Login to your merchant account
