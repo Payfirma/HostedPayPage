@@ -37,6 +37,9 @@ You will also see any lint errors in the console.
     billing_address:
  }
 
+For email, If customer vault HPP feature is enabled and email provided is saved in PayHQ with atleast one card. 
+Then user would get option to do transaction either with saved card or new card.
+
 For shipping_address/billing_address, country and province should be in short code and whole object as JSON string.
 
 Ex - shipping_address: '{
